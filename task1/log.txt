@@ -1,0 +1,11 @@
+commit 76f086e4fbaf331bc09b6797df1b17984b1b1976 (HEAD -> master)
+Author: busego <busko.egor@gmail.com>
+Date:   Mon Feb 17 21:55:50 2020 +0300
+
+    add task1/status.txt
+
+commit d6ed88f5ff4f78c5fd07eedb4fcd508e98b40c29
+Author: busego <busko.egor@gmail.com>
+Date:   Mon Feb 17 21:40:23 2020 +0300
+
+    “add
