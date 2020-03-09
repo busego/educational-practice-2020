@@ -1,0 +1,9 @@
+    {API_NAME} - Dogs
+(Архив всех пород собак)
+
+1st-request: если не указывать /random в конце запроса, то получишь Все имеющиеся фото собак, указанной породы (/african/images)
+2nd-request: получили рандомное фото породы akita (получил ссылку на фото собаки)  (/akita/images/random)
+3rd-request: получили 4 рандомных фото породы hound (в конце запроса указал кол-во фото "4")  (/hound/images/random/4)
+4th-request: получили 28 рандомных фото породы pomeranian  (/pomeranian/images/random/28)
+
+
