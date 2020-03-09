@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "6a62cc98-947c-4882-ac8c-60f347efc33d",
+		"name": "task4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.adorable.io/avatars/275/abott@adorable.png",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.adorable.io/avatars/300/egor@busko.png",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.adorable.io/avatars/250/Zhanna@Vasilenko.png",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.adorable.io/avatars/300/egor@busko.jpeg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dog.ceo/api/breed/african/images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dog.ceo/api/breed/african/images",
+					"protocol": "https",
+					"host": [
+						"dog",
+						"ceo"
+					],
+					"path": [
+						"api",
+						"breed",
+						"african",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dog.ceo/api/breed/akita/images/random",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dog.ceo/api/breed/hound/images/random/4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dog.ceo/api/breed/pomeranian/images/random/28",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.tvmaze.com/shows/1/episodesbydate?date=2013-07-01",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.tvmaze.com/shows/1/crew",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.tvmaze.com/shows/1/seasons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.adorable.io/avatars/250/Zhanna@Vasilenko.png",
+					"protocol": "https",
+					"host": [
+						"api",
+						"adorable",
+						"io"
+					],
+					"path": [
+						"avatars",
+						"250",
+						"Zhanna@Vasilenko.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.tvmaze.com/schedule?country=US&date=2014-12-01",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.tvmaze.com/schedule?country=US&date=2014-12-01",
+					"protocol": "http",
+					"host": [
+						"api",
+						"tvmaze",
+						"com"
+					],
+					"path": [
+						"schedule"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "US"
+						},
+						{
+							"key": "date",
+							"value": "2014-12-01"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
