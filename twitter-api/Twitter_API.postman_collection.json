@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "48f1f56e-aa46-4de9-ae4c-92e911ff1b29",
+		"name": "Twitter_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get_BeToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bb0ee46-eaaa-4a8a-a441-6f22e463276e",
+						"exec": [
+							"pm.environment.set(\"bearer\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "LsOpksGyY5ul3iPIHqhr5N5zMvsr50bjFBZd9mzahdAZjFXLCv",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "XRbDYerw94fWP47kyXwIEDsnA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://api.twitter.com/oauth2/token/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bd5af7c4-79e5-4937-8f65-6affe0a669f9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/users/by/username/:username",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"users",
+						"by",
+						"username",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "TwitterDev"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User_expansions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/users/by/username/:username?expansions=pinned_tweet_id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"users",
+						"by",
+						"username",
+						":username"
+					],
+					"query": [
+						{
+							"key": "expansions",
+							"value": "pinned_tweet_id"
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "TwitterDev"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TweetFields",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/tweets/:id?tweet.fields=attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"tweets",
+						":id"
+					],
+					"query": [
+						{
+							"key": "tweet.fields",
+							"value": "attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1237435016134656006"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Friend1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/users/by/username/:username?expansions=pinned_tweet_id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"users",
+						"by",
+						"username",
+						":username"
+					],
+					"query": [
+						{
+							"key": "expansions",
+							"value": "pinned_tweet_id"
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "7daizy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "It'sMe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/users/by/username/:username?expansions=pinned_tweet_id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"users",
+						"by",
+						"username",
+						":username"
+					],
+					"query": [
+						{
+							"key": "expansions",
+							"value": "pinned_tweet_id"
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "twisterksi"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MyTweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/tweets/:id?tweet.fields=attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"tweets",
+						":id"
+					],
+					"query": [
+						{
+							"key": "tweet.fields",
+							"value": "attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1241644826203959296"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Covid19",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/users/by/username/:username?expansions=pinned_tweet_id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"users",
+						"by",
+						"username",
+						":username"
+					],
+					"query": [
+						{
+							"key": "expansions",
+							"value": "pinned_tweet_id"
+						}
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "V2019N"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Covid19_tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "AAAAAAAAAAAAAAAAAAAAANndCwEAAAAA55kDMGGGQkSdRd1abFzDKno7dhA%3DcgwCpJ8MWTRRA63P1gGTqHW2Tu7Y1XAsPfaF2Y8zYQ6DWqZOpn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twitter.com/labs/2/tweets/:id?tweet.fields=attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twitter",
+						"com"
+					],
+					"path": [
+						"labs",
+						"2",
+						"tweets",
+						":id"
+					],
+					"query": [
+						{
+							"key": "tweet.fields",
+							"value": "attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1239746000694079488"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
