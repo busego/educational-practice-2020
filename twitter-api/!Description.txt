@@ -1,0 +1,16 @@
+1_шаг
+ - Получил twitter developer
+ - Создал свой App, получил сразу 2 'keys'
+ - Attached my App to TwitDevLabs с названием "Tweets and Users"
+ - С помощью Postman, сделал запрос с указанием 'keys', получил bearer-token
+
+2_шаг
+ - Запросы для TwitterDev
+ - Используем метод Get, во вкладке Authorization мы вводим наш bearer-token
+ - Для username добавили expansion
+ - Используя Tweet ID из last example, добавили несколько value в The fields parameter
+
+3_шаг
+ - Сделал запросы на моей подруги, себя и Covid19 :)
+ - У моей подруги, как мы видим нету закрепленных твитов, а у меня и Covid19 есть
+ - Также для Covid19 твита и моего твита я запросил расширенную информацию
