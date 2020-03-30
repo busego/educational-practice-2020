@@ -2,10 +2,10 @@ class PostList {
 
     #currentPosts = [];
     #uncheckedID = 0;
-
     constructor(posts) {
-        this.addAll(posts);
+         this.addAll(posts);
     }
+
 
     getPage(skip = 0, top = 10, filterConfig = {}) {
         this.sortByDates();
@@ -26,6 +26,7 @@ class PostList {
         })
     }
 
+    
     filterPosts(filterConfig = {}, keys) {
         if (filterConfig.hasOwnProperty('hashtags')) {
             var hashtags = filterConfig['hashtags'];
