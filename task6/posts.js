@@ -183,7 +183,7 @@
     ];
 
 
-    function getPosts(skip = 0, top = 10, filterConfig ={}) {
+     function getPosts(skip = 0, top = 10, filterConfig ={}) {
         if (!filterConfig) {
             if (!validatePost(filterConfig)) {
                 console.log("Crashed in validation of filterConfig");
@@ -206,9 +206,9 @@
                 success = true;
             }
         }
-        if (filterConfig.tags) {
-            retArr = posts.filter(item => compArrays(item.tags, filterConfig.tags));
-            if ((posts.findIndex(item => item.tags == filterConfig.tags)) !== -1){
+        if (filterConfig.hashtags) {
+            retArr = posts.filter(item => compareTags(item.hashtags, filterConfig.hashtags));
+            if ((posts.findIndex(item => item.hashtags == filterConfig.hashtags)) !== -1){
                 success = true;
             }
         }
@@ -216,12 +216,26 @@
 
         if (success) {
             console.log('filterConfig isnot empty');
-            return filteredPosts.slice(skip, skip + top).sort(a => a.createdAt);
+            return retArr.slice(skip, skip + top).sort(a => a.createdAt);
         } else {
             console.log('filterConfig empty');
             return posts.slice(skip, skip + top).sort(a => a.createdAt);
         }
 
+    }
+
+    compareTags(postsTags, filterCTags) {
+        let areEqual = true;
+        if (postsTags.length === filterCTags.length) {
+            for (let i = 0; i < postsTags.length; i++) {
+                if (postsTags[i] !== filterCTags[i]) {
+                    equal = false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return equal;
     }
 
 
