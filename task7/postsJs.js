@@ -1,11 +1,12 @@
 class PostCollection {
-    collPosts = [];
+    _collPosts = [];
 
     constructor(posts = []) {
-        this.collPosts = posts.filter(post => this.validate(post));
+        this._collPosts = posts.filter(post => this.validate(post));
     }
 
-    validate(post) {
+    //i can't use static validate from nonstatic funcs
+    validate(post={}) {
         if (typeof post.description !== 'string' || post.description.length >= 200) {
             console.log("Crashed in validation");
             return false;
@@ -14,7 +15,7 @@ class PostCollection {
             console.log("Crashed in validation");
             return false;
         }
-        if (!Array.isArray(post.hashTags) && post.hashTags !== undefined) {
+        if (!Array.isArray(post.hashtags) && post.hashtags !== undefined) {
             console.log("Crashed in validation");
             return false;
         }
@@ -26,63 +27,19 @@ class PostCollection {
     }
 
     getPage(skip = 0, top = 10, filterConfig = {}) {
-        if (!filterConfig) {
-            if (!this.validate(filterConfig)) {
-                console.log("Crashed in validation of filterConfig");
-                return [];
-            }
+        this.filterConfig = filterConfig;
+        if(this.filterConfig != null) {
+            return this._collPosts.filter(item => (this.filterConfig.author == null || item.author === this.filterConfig.author) &&
+              (this.filterConfig.hashtags == null || this.filterConfig.hashtags.filter(tag => item.hashtags.includes(tag)).length === this.filterConfig.hashtags.length))
+              .slice(skip, skip + top).sort(a => a.createdAt);
         }
-
-        let success = false;
-
-        let retArr = [];
-        if (filterConfig.author) {
-            retArr = this.collPosts.filter(item => item.author === filterConfig.author);
-            if ((this.collPosts.findIndex(item => item.author == filterConfig.author)) !== -1){
-                success = true;
-            }
-        }
-        if (filterConfig.createdAt) {
-            retArr = this.collPosts.filter(item => item.createdAt === filterConfig.createdAt);
-            if ((this.collPosts.findIndex(item => item.createdAt == filterConfig.createdAt)) !== -1){
-                success = true;
-            }
-        }
-        if (filterConfig.hashtags) {
-            retArr = this.collPosts.filter(item => this.compareTags(item.hashtags, filterConfig.hashtags));
-            if ((this.collPosts.findIndex(item => item.hashtags == filterConfig.hashtags)) !== -1){
-                success = true;
-            }
-        }
-
-
-        if (success) {
-            console.log('filterConfig isnot empty');
-            return retArr.slice(skip, skip + top).sort(a => a.createdAt);
-        } else {
-            console.log('filterConfig empty');
-            return this.collPosts.slice(skip, skip + top).sort(a => a.createdAt);
-        }
+        return this._collPosts.slice(skip, skip + top).sort(a => a.createdAt);
     }
 
-
-     compareTags(postsTags, filterCTags) {
-        let areEqual = true;
-        if (postsTags.length === filterCTags.length) {
-            for (let i = 0; i < postsTags.length; i++) {
-                if (postsTags[i] !== filterCTags[i]) {
-                    equal = false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return equal;
-    }
 
 
     get(id = 0) {
-        return this.collPosts.find(item => item.id === id);
+        return this._collPosts.find(item => item.id === id);
     }
 
     addAll(posts = []) {
@@ -91,10 +48,10 @@ class PostCollection {
 
     add(post = {}) {
         if (this.validate(post)) {
-            post.id = this.collPosts[this.collPosts.length - 1].id + 1;
+            post.id = this._collPosts[this._collPosts.length - 1].id + 1;
             post.createdAt = new Date();
             post.author = "Smb";
-            this.collPosts.push(post);
+            this._collPosts.push(post);
             return true;
         }
         console.log("Crashed in add Post");
@@ -109,7 +66,9 @@ class PostCollection {
         }
         Object.keys(post).forEach(a => toEdPost[a] = post[a]);
 
-        if (this.validate(this.get(id))) {
+        if (this.validate(toEdPost)) {
+            this.remove(id);
+            this.add(toEdPost);
             return true;
         }
         console.log("Crashed in validation of editPost");
@@ -117,17 +76,12 @@ class PostCollection {
     }
 
     remove(id = 0) {
-        let check = this.collPosts.length;
-        this.collPosts = this.collPosts.filter(item => item.id !== id);
-        if (check !== this.collPosts.length) {
-            return true;
-        }
-        console.log('There is no such id to remove');
-        return false;
+        this._collPosts = this._collPosts.filter(value => value.id !== id);
+        return true
     }
 
     clear() {
-        this.collPosts = []
+        this._collPosts = []
         console.log('all posts cleared');
     }
 }
@@ -357,7 +311,8 @@ console.log(myPosts.add({
     hashtags: ['#scale', '#world']
 }));
 
-console.log(myPosts.getPage(5, 15, {hashtags: ['Yellow']}));
+console.log(myPosts.get('4'));
+console.log(myPosts.getPage(5, 15));
 myPosts.edit('1', {description: 'Several any had enjoyed shewing studied two'});
 console.log(myPosts.get('1'));
 
@@ -366,3 +321,4 @@ myPosts.remove(1);
 myPosts.clear();
 
 console.log(myPosts.get('4'));
+console.log(myPosts.get("8"));
