@@ -10,6 +10,11 @@ public class NameServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("nameIndex.jsp").forward(request, response);
+        String name = request.getParameter("name");
+        if (name.length() > 100) {
+            throw new IOException("Too much simbols");
+        }
+        response.getWriter().write("Name is: " + name);
     }
+}
 }
