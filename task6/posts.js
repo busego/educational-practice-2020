@@ -1,4 +1,6 @@
 (function () {
+    var authorTM = "Smb";
+
     var posts = [
         {
             id: '1',
@@ -183,7 +185,7 @@
     ];
 
 
-     function getPosts(skip = 0, top = 10, filterConfig ={}) {
+    function getPosts(skip = 0, top = 10, filterConfig = {}) {
         if (!filterConfig) {
             if (!validatePost(filterConfig)) {
                 console.log("Crashed in validation of filterConfig");
@@ -191,51 +193,31 @@
             }
         }
 
-        let success = false;
 
-        let retArr = [];
-        if (filterConfig.author) {
-            retArr = posts.filter(item => item.author === filterConfig.author);
-            if ((posts.findIndex(item => item.author == filterConfig.author)) !== -1){
-                success = true;
-            }
-        }
-        if (filterConfig.createdAt) {
-            retArr = posts.filter(item => item.createdAt === filterConfig.createdAt);
-            if ((posts.findIndex(item => item.createdAt == filterConfig.createdAt)) !== -1){
-                success = true;
-            }
-        }
-        if (filterConfig.hashtags) {
-            retArr = posts.filter(item => compareTags(item.hashtags, filterConfig.hashtags));
-            if ((posts.findIndex(item => item.hashtags == filterConfig.hashtags)) !== -1){
-                success = true;
-            }
-        }
-
-
-        if (success) {
-            console.log('filterConfig isnot empty');
-            return retArr.slice(skip, skip + top).sort(a => a.createdAt);
-        } else {
+        if (filterConfig!=null) {
             console.log('filterConfig empty');
-            return posts.slice(skip, skip + top).sort(a => a.createdAt);
+            return posts.sort((a,b) => b.createdAt-a.createdAt).slice(skip, skip + top);
+        } else {
+            let retArr = [];
+            retArr = posts.filter(item => item.author === filterConfig.author && item.createdAt === filterConfig.createdAt && compareTags(item.hashtags, filterConfig.hashtags));
+            console.log('filterConfig isnot empty');
+            return retArr.sort((a,b) => b.createdAt-a.createdAt).slice(skip, skip + top);
         }
-
     }
 
-    compareTags(postsTags, filterCTags) {
-        let areEqual = true;
-        if (postsTags.length === filterCTags.length) {
-            for (let i = 0; i < postsTags.length; i++) {
-                if (postsTags[i] !== filterCTags[i]) {
-                    equal = false;
+
+    function compareTags(postsTags, filterCTags)
+    {
+        if (postsTags.length < filterCTags.length) {
+            return false;
+        } else {
+            for (let i = 0; i < filterCTags.length; i++) {
+                if (postsTags.indexOf(filterCTags[i]) === -1) {
+                    return false;
                 }
             }
-        } else {
-            return false;
+            return true;
         }
-        return equal;
     }
 
 
@@ -252,7 +234,7 @@
             console.log("Crashed in validation");
             return false;
         }
-        if (!Array.isArray(post.hashTags) && post.hashTags !== undefined) {
+        if (!Array.isArray(post.hashtags) && post.hashtags !== undefined) {
             console.log("Crashed in validation");
             return false;
         }
@@ -265,9 +247,9 @@
 
     function addPost(post) {
         if (validatePost(post)) {
-            post.id = posts[posts.length - 1].id + 1;
+            post.id = post.createdAt.toString();
             post.createdAt = new Date();
-            post.author = "Smb";
+            post.author = authorTM;
             posts.push(post);
             return true;
         }
@@ -284,7 +266,9 @@
         }
         Object.keys(post).forEach(a => toEdPost[a] = post[a]);
 
-        if (validatePost(getPost(id))) {
+        if (validatePost(toEdPost)) {
+            removePost(id);
+            addPost(toEdPost);
             return true;
         }
         console.log("Crashed in validation of editPost");
@@ -292,15 +276,8 @@
     }
 
     function removePost(id) {
-        if (posts.find(item => item.id == id)) {
-            posts.splice(posts.findIndex(item => item.id === id), 1);
-            return true;
-        }
-        console.log('There is no such id');
-        return false;
+        posts = posts.filter(item => item.id !== id);
     }
-
-
 
 
     console.log(getPosts());
@@ -331,10 +308,10 @@
         tag: [],
         likes: ['Blue', 'Smile']
     }));
-    console.log(getPosts(0,21));
+    console.log(getPosts(0, 21));
 
 
     editPost('1', {description: '191'});
     removePost('31');
-    console.log(getPosts(0,posts.length));
+    console.log(getPosts(0, posts.length));
 }());
