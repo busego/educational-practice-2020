@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<p style = "color:red">Java Web Application</p>
+<p style = "color:red">Application Is Running</p>
 </body>
 </html>
