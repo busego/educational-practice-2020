@@ -13,18 +13,10 @@ public class TFilter implements Filter {
         long end = System.currentTimeMillis();
 
         HttpServletRequest httpRequest = (HttpServletRequest) req;
-        String path;
-
-        path = ((HttpServletRequest) req).getRequestURL().toString();
-
-        //String path = req.getScheme() + "://"+ req.getLocalAddr() + ((HttpServletRequest) req).getRequestURI();
         String method = httpRequest.getMethod();
-        System.out.println(String.format("%s '%s' - done(%ms)", method , path, end-start));
-       /* try {
-            resp.getWriter().println(String.format("%s '%s' - done(%d ms)", method, path, end - start));
-        } catch (Exception e){
-            System.out.println(String.format("%s '%s' - done(%ms)", method , path, end-start));
-        }*/
+        String url = String.valueOf(httpRequest.getRequestURL());
+
+        System.out.println("\n" + method + " - " + url + " - " + (end - start) + "ms");
 
 
     }
