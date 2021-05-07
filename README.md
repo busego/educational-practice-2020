@@ -1,6 +1,4 @@
 # educational-practice-2020
-# Twitter Clone
-
 ## Description
 Twitter-like social network build with mentorship from [Exadel](https://www.exadel.com/) employees. 
 ### Technologies
