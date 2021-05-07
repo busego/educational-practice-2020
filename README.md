@@ -4,7 +4,7 @@
 ## Description
 Twitter-like social network build with mentorship from [Exadel](https://www.exadel.com/) employees. 
 ### Technologies
-**Frontend**: HTML, CSS, ES6 Javascript
+**Frontend**: HTML, CSS, ES6 Javascript \
 **Backend**: Java Servlets, MySQL
 ### Features
 - Single page application
