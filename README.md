@@ -1,3 +1,4 @@
+InTouch
 # educational-practice-2020
 ## Description
 Twitter-like social network build with mentorship from [Exadel](https://www.exadel.com/) employees. 
